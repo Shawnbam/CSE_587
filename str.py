@@ -1,5 +1,25 @@
 import streamlit as st
 
+import importlib.util
+
+# Load the Python script
+spec = importlib.util.spec_from_file_location("my_notebook", "Loan_Default.py")
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+
+# Define input fields
+input1 = st.text_input("Input 1")
+input2 = st.slider("Input 2", 0, 10, 5)
+input3 = st.selectbox("Input 3", ["Option 1", "Option 2", "Option 3"])
+
+# Call the classification function
+result = module.classify_data()
+
+# Show the classification result
+st.write("Classification result:", result)
+
+
+
 # Define input fields
 gender = st.selectbox("Gender", ["Male", "Female"])
 loan_type = st.selectbox("Loan Type", ["Home loan", "Auto loan", "Personal loan"])
