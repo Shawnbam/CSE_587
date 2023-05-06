@@ -13,7 +13,11 @@ input2 = st.slider("Input 2", 0, 10, 5)
 input3 = st.selectbox("Input 3", ["Option 1", "Option 2", "Option 3"])
 
 # Call the classification function
-result = module.classify_data()
+result = module.getRandomForestClassification([0.55, 0.33, 0.555])
+predictions = [int(p) for p in result]
+
+# Print the result
+print("The predicted values are:", predictions)
 
 # Show the classification result
 st.write("Classification result:", result)

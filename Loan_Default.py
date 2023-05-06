@@ -509,6 +509,9 @@ randomForest.fit(X_train, y_train)
 # Predictions
 
 predict = randomForest.predict(X_test)
+def getRandomForestClassification(X_test_New):
+    predict = randomForest.predict(X_test_New)
+    return predict
 
 #Plotting the confusion matrix
 
@@ -548,7 +551,9 @@ print(classification_report(y_test,predict))
 logmodel = LogisticRegression(max_iter=100000)
 logmodel.fit(X_train,y_train)
 predict = logmodel.predict(X_test)
-
+def getLogisticClassification(X_test_New):
+    predict = logmodel.predict(X_test_New)
+    return predict
 
 # In[ ]:
 
