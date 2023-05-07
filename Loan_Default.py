@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 from pandas_profiling import ProfileReport
 import sklearn
+import pickle
 
 import seaborn as sns
 
@@ -506,12 +507,11 @@ randomForest = RandomForestClassifier()
 
 randomForest.fit(X_train, y_train)
 
+with open('randomForest.pkl', 'wb') as f:
+    pickle.dump(randomForest, f)
 # Predictions
 
 predict = randomForest.predict(X_test)
-def getRandomForestClassification(X_test_New):
-    predict = randomForest.predict(X_test_New)
-    return predict
 
 #Plotting the confusion matrix
 
@@ -550,10 +550,13 @@ print(classification_report(y_test,predict))
 
 logmodel = LogisticRegression(max_iter=100000)
 logmodel.fit(X_train,y_train)
+with open('logmodel.pkl', 'wb') as f:
+    pickle.dump(logmodel, f)
 predict = logmodel.predict(X_test)
-def getLogisticClassification(X_test_New):
-    predict = logmodel.predict(X_test_New)
-    return predict
+cols = X_test.columns.tolist()
+
+# print("itssss", cols)
+
 
 # In[ ]:
 
@@ -590,6 +593,9 @@ print(classification_report(y_test,predict))
 
 clf = MLPClassifier(random_state=1, hidden_layer_sizes=[10,10], max_iter=3000)
 clf.fit(X_train, y_train)
+
+with open('clf.pkl', 'wb') as f:
+    pickle.dump(clf, f)
 predict=clf.predict(X_test)
 
 
@@ -630,6 +636,8 @@ plt.show()
 
 NB = GaussianNB()
 NB.fit(X_train,y_train)
+with open('NB.pkl', 'wb') as f:
+    pickle.dump(NB, f)
 predict=NB.predict(X_test)
 
 
@@ -667,6 +675,8 @@ print(classification_report(y_test,predict))
 
 gdboost = GradientBoostingClassifier()
 gdboost.fit(X_train,y_train)
+with open('gdboost.pkl', 'wb') as f:
+    pickle.dump(gdboost, f)
 predict=gdboost.predict(X_test)
 
 
@@ -704,6 +714,8 @@ print(classification_report(y_test,predict))
 
 tree=DecisionTreeClassifier()
 tree.fit(X_train, y_train)
+with open('tree.pkl', 'wb') as f:
+    pickle.dump(tree, f)
 predict = tree.predict(X_test)
 
 
@@ -737,17 +749,39 @@ print(classification_report(y_test,predict))
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
-
+print("DONE")
 
 
 # In[ ]:
 
 
 
+
+
+# In[ ]:
+
+
+def getLogisticClassification(X_NEW_TEST):
+    predict = logmodel.predict(X_NEW_TEST)
+    return predict
+
+def getNeuralNetworkClassification(X_NEW_TEST):
+    predict = randomForest.predict(X_NEW_TEST)
+    return predict
+
+def getRandomForestClassification(X_NEW_TEST):
+    predict = clf.predict(X_NEW_TEST)
+    return predict
+
+def getNaiveBaseClassification(X_NEW_TEST):
+    predict = NB.predict(X_NEW_TEST)
+    return predict
+
+def getGDBoostClassification(X_NEW_TEST):
+    predict = gdboost.predict(X_NEW_TEST)
+    return predict
+
+def getDecisionTreeClassification(X_NEW_TEST):
+    predict = tree.predict(X_NEW_TEST)
+    return predict
 

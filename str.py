@@ -6,47 +6,59 @@ import importlib.util
 
 
 
+import pickles
+
 # Load the Python script
-spec = importlib.util.spec_from_file_location("my_notebook", "Loan_Default.py")
-module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(module)
+# spec = importlib.util.spec_from_file_location("my_notebook", "Loan_Default.py")
+# module = importlib.util.module_from_spec(spec)
+# spec.loader.exec_module(module)
 
 # Define input fields
-input1 = st.text_input("Input 1")
-input2 = st.slider("Input 2", 0, 10, 5)
-input3 = st.selectbox("Input 3", ["Option 1", "Option 2", "Option 3"])
+# input1 = st.text_input("Input 1")
+# input2 = st.slider("Input 2", 0, 10, 5)
+# input3 = st.selectbox("Input 3", ["Option 1", "Option 2", "Option 3"])
 
 # Call the classification function
-result = module.getRandomForestClassification([0.55, 0.33, 0.555])
+result = pickles.getRandomForestClassification([[0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555],
+                                           [0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555, 0.55, 0.33, 0.555]])
 predictions = [int(p) for p in result]
 
 # Print the result
-print("The predicted values are:", predictions)
+# print("The predicted values are:", predictions)
+for p in range(len(predictions)):
+    if predictions[p] == 0:
+        status = st.text_input("Status " + str(p), value="Loan Defaulter")
+    else:
+        status = st.text_input("Status " + str(p), value="Not a Loan Defaulter")
+
 
 # Show the classification result
-st.write("Classification result:", result)
-
+# st.write("Classification result:", result)
 
 
 # Define input fields
 gender = st.selectbox("Gender", ["Male", "Female"])
-loan_type = st.selectbox("Loan Type", ["Home loan", "Auto loan", "Personal loan"])
+loan_type = st.selectbox(
+    "Loan Type", ["Home loan", "Auto loan", "Personal loan"])
 credit_worthiness = st.selectbox("Credit Worthiness", ["Good", "Fair", "Poor"])
 open_credit = st.number_input("Open Credit", value=0)
 business_or_commercial = st.selectbox("Business or Commercial", ["Yes", "No"])
 loan_amount = st.number_input("Loan Amount", value=0)
 interest_only = st.selectbox("Interest Only", ["Yes", "No"])
 lump_sum_payment = st.selectbox("Lump Sum Payment", ["Yes", "No"])
-construction_type = st.selectbox("Construction Type", ["Residential", "Commercial"])
-occupancy_type = st.selectbox("Occupancy Type", ["Primary Residence", "Secondary Residence", "Investment Property"])
+construction_type = st.selectbox(
+    "Construction Type", ["Residential", "Commercial"])
+occupancy_type = st.selectbox("Occupancy Type", [
+                              "Primary Residence", "Secondary Residence", "Investment Property"])
 secured_by = st.selectbox("Secured By", ["Collateral", "Personal Guarantee"])
 total_units = st.number_input("Total Units", value=0)
 credit_type = st.selectbox("Credit Type", ["Fixed", "Variable"])
 credit_score = st.number_input("Credit Score", value=0)
-co_applicant_credit_type = st.selectbox("Co-Applicant Credit Type", ["Fixed", "Variable"])
+co_applicant_credit_type = st.selectbox(
+    "Co-Applicant Credit Type", ["Fixed", "Variable"])
 region = st.selectbox("Region", ["East", "West", "North", "South"])
 security_type = st.selectbox("Security Type", ["Mortgage", "Guarantee"])
-status = st.number_input("Status", value=0)
+# status = st.number_input("Status", value=0)
 
 # Show the input values
 st.write("Gender:", gender)
