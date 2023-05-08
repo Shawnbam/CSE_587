@@ -4,6 +4,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import io
 import pickle
+import pandas as pd
+import pickles
 
 if 'my_key' not in st.session_state:
     st.session_state['my_key'] = None
@@ -18,7 +20,31 @@ model = st.selectbox("Select a model", [
     "GDBoost",
     "DecisionTree Classifier",
 ])
+csv_file = st.file_uploader("Upload a CSV file", type="csv")
 
+if csv_file is not None:
+    # Read the file contents into a pandas dataframe
+    df = pd.read_csv(csv_file)
+    if model == "Logistic Regression":
+        result = pickles.getLogisticClassification(df)
+    elif model == "NeuralNetwork":
+        result = pickles.getCLFClassification(df)
+    elif model == "RandomForest Classification":
+        result = pickles.getRandomForestClassification(df)
+    elif model == "Naive Bayee Classifier":
+        result = pickles.getNBClassification(df)
+    elif model == "GDBoost":
+        result = pickles.getGDBoostClassification(df)
+    elif model == "DecisionTree Classifier":
+        result = pickles.getTreeClassification(df)
+    
+    predictions = ['Loan Defaulter' if p == 1 else 'Not a Loan Defaulter' for p in result]
+    
+    # Combine the original dataframe and the predicted labels into a new dataframe
+    df['Prediction'] = predictions
+
+    # Display the combined dataframe as a table
+    st.dataframe(df)
 if model == "Select a model":
     st.write(f"Please select a model")
 elif model == "Logistic Regression":
@@ -39,7 +65,6 @@ elif model == "Logistic Regression":
     with open('logModelPre.pkl', 'rb') as f:
         logModelPre = pickle.load(f)
     st.text(logModelPre)
-
 elif model == "NeuralNetwork":
     st.write(f"You selected {model}")
 
