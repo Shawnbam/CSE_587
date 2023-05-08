@@ -34,6 +34,9 @@ if model == "Logistic Regression":
 
     # Display the plot in Streamlit
     st.pyplot(fig)
+    with open('logModelPre.pkl', 'rb') as f:
+        logModelPre = pickle.load(f)
+    st.text(logModelPre)
 
 elif model == "NeuralNetwork":
     st.write(f"You selected {model}")
@@ -51,6 +54,9 @@ elif model == "NeuralNetwork":
 
     # Display the plot in Streamlit
     st.pyplot(fig)
+    with open('neuralNetworkPre.pkl', 'rb') as f:
+        neuralNetworkPre = pickle.load(f)
+    st.text(neuralNetworkPre)
 elif model == "RandomForest Classification":
     st.write(f"You selected {model}")
 
@@ -67,6 +73,9 @@ elif model == "RandomForest Classification":
 
     # Display the plot in Streamlit
     st.pyplot(fig)
+    with open('randomForestPre.pkl', 'rb') as f:
+        randomForestPre = pickle.load(f)
+    st.text(randomForestPre)
 elif model == "Naive Bayee Classifier":
     st.write(f"You selected {model}")
 
@@ -83,6 +92,9 @@ elif model == "Naive Bayee Classifier":
 
     # Display the plot in Streamlit
     st.pyplot(fig)
+    with open('naiveBayesPre.pkl', 'rb') as f:
+        naiveBayesPre = pickle.load(f)
+    st.text(naiveBayesPre)
 elif model == "GDBoost":
     st.write(f"You selected {model}")
 
@@ -99,6 +111,9 @@ elif model == "GDBoost":
 
     # Display the plot in Streamlit
     st.pyplot(fig)
+    with open('gdBoostPre.pkl', 'rb') as f:
+        gdBoostPre = pickle.load(f)
+    st.text(gdBoostPre)
 elif model == "DecisionTree Classifier":
     st.write(f"You selected {model}")
 
@@ -115,3 +130,6 @@ elif model == "DecisionTree Classifier":
 
     # Display the plot in Streamlit
     st.pyplot(fig)
+    with open('decTreePre.pkl', 'rb') as f:
+        decTreePre = pickle.load(f)
+    st.text(decTreePre)
