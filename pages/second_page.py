@@ -45,33 +45,68 @@ if csv_file is not None and model != "Select a model":
 
     # Display the combined dataframe as a table
     st.dataframe(df)
-if model == "Select a model":
-    st.write(f"Please select a model")
-elif model == "Logistic Regression":
-    st.write(f"You selected {model}")
-    logisticRegressionConfusionMatrix = None
-    with open('logisticRegressionConfusionMatrix.pkl', 'rb') as f:
-        logisticRegressionConfusionMatrix = pickle.load(f)
-    sns.heatmap(logisticRegressionConfusionMatrix, annot=True, cmap='Greens')
-    plt.xlabel('Predicted Labels')
-    plt.ylabel('True Labels')
-    plt.title('Confusion Matrix')
-
-    # Get the Matplotlib figure object
-    fig = plt.gcf()
-
-    # Display the plot in Streamlit
-    st.pyplot(fig)
-    with open('logModelPre.pkl', 'rb') as f:
+if model != "Select a model":
+    
+    if model == "Logistic Regression":
+        st.write(f"You selected {model}")
+        logisticRegressionConfusionMatrix = None
+        with open('logisticRegressionConfusionMatrix.pkl', 'rb') as f:
+            logisticRegressionConfusionMatrix = pickle.load(f)
+        sns.heatmap(logisticRegressionConfusionMatrix, annot=True, cmap='Greens')
+        plt.xlabel('Predicted Labels')
         logModelPre = pickle.load(f)
-    st.text(logModelPre)
-elif model == "NeuralNetwork":
-    st.write(f"You selected {model}")
+        st.text(logModelPre)
+    elif model == "NeuralNetwork":
+        st.write(f"You selected {model}")
 
-    neuralNetworkConfusionMatrix = None
-    with open('neuralNetworkConfusionMatrix.pkl', 'rb') as f:
-        neuralNetworkConfusionMatrix = pickle.load(f)
-    sns.heatmap(neuralNetworkConfusionMatrix, annot=True, cmap='Greens')
+        neuralNetworkConfusionMatrix = None
+        with open('neuralNetworkConfusionMatrix.pkl', 'rb') as f:
+            neuralNetworkConfusionMatrix = pickle.load(f)
+        sns.heatmap(neuralNetworkConfusionMatrix, annot=True, cmap='Greens')
+        with open('neuralNetworkPre.pkl', 'rb') as f:
+            neuralNetworkPre = pickle.load(f)
+        st.text(neuralNetworkPre)
+    elif model == "RandomForest Classification":
+        st.write(f"You selected {model}")
+
+        randomForestConfusionMatrix = None
+        with open('randomForestConfusionMatrix.pkl', 'rb') as f:
+            randomForestConfusionMatrix = pickle.load(f)
+        sns.heatmap(randomForestConfusionMatrix, annot=True, cmap='Greens')
+        with open('randomForestPre.pkl', 'rb') as f:
+            randomForestPre = pickle.load(f)
+        st.text(randomForestPre)
+    elif model == "Naive Bayee Classifier":
+        st.write(f"You selected {model}")
+
+        naiveBayesConfusionMatrix = None
+        with open('naiveBayesConfusionMatrix.pkl', 'rb') as f:
+            naiveBayesConfusionMatrix = pickle.load(f)
+        sns.heatmap(naiveBayesConfusionMatrix, annot=True, cmap='Greens')
+        with open('naiveBayesPre.pkl', 'rb') as f:
+            naiveBayesPre = pickle.load(f)
+        st.text(naiveBayesPre)
+    elif model == "GDBoost":
+        st.write(f"You selected {model}")
+
+        gdBoostConfusionMatrix = None
+        with open('gdBoostConfusionMatrix.pkl', 'rb') as f:
+            gdBoostConfusionMatrix = pickle.load(f)
+        sns.heatmap(gdBoostConfusionMatrix, annot=True, cmap='Greens')
+        with open('gdBoostPre.pkl', 'rb') as f:
+            gdBoostPre = pickle.load(f)
+        st.text(gdBoostPre)
+    elif model == "DecisionTree Classifier":
+        st.write(f"You selected {model}")
+
+        decisionTreeConfusionMatrix = None
+        with open('decisionTreeConfusionMatrix.pkl', 'rb') as f:
+            decisionTreeConfusionMatrix = pickle.load(f)
+        sns.heatmap(decisionTreeConfusionMatrix, annot=True, cmap='Greens')
+        with open('decTreePre.pkl', 'rb') as f:
+            decTreePre = pickle.load(f)
+        st.text(decTreePre)
+    
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
     plt.title('Confusion Matrix')
@@ -81,82 +116,3 @@ elif model == "NeuralNetwork":
 
     # Display the plot in Streamlit
     st.pyplot(fig)
-    with open('neuralNetworkPre.pkl', 'rb') as f:
-        neuralNetworkPre = pickle.load(f)
-    st.text(neuralNetworkPre)
-elif model == "RandomForest Classification":
-    st.write(f"You selected {model}")
-
-    randomForestConfusionMatrix = None
-    with open('randomForestConfusionMatrix.pkl', 'rb') as f:
-        randomForestConfusionMatrix = pickle.load(f)
-    sns.heatmap(randomForestConfusionMatrix, annot=True, cmap='Greens')
-    plt.xlabel('Predicted Labels')
-    plt.ylabel('True Labels')
-    plt.title('Confusion Matrix')
-
-    # Get the Matplotlib figure object
-    fig = plt.gcf()
-
-    # Display the plot in Streamlit
-    st.pyplot(fig)
-    with open('randomForestPre.pkl', 'rb') as f:
-        randomForestPre = pickle.load(f)
-    st.text(randomForestPre)
-elif model == "Naive Bayee Classifier":
-    st.write(f"You selected {model}")
-
-    naiveBayesConfusionMatrix = None
-    with open('naiveBayesConfusionMatrix.pkl', 'rb') as f:
-        naiveBayesConfusionMatrix = pickle.load(f)
-    sns.heatmap(naiveBayesConfusionMatrix, annot=True, cmap='Greens')
-    plt.xlabel('Predicted Labels')
-    plt.ylabel('True Labels')
-    plt.title('Confusion Matrix')
-
-    # Get the Matplotlib figure object
-    fig = plt.gcf()
-
-    # Display the plot in Streamlit
-    st.pyplot(fig)
-    with open('naiveBayesPre.pkl', 'rb') as f:
-        naiveBayesPre = pickle.load(f)
-    st.text(naiveBayesPre)
-elif model == "GDBoost":
-    st.write(f"You selected {model}")
-
-    gdBoostConfusionMatrix = None
-    with open('gdBoostConfusionMatrix.pkl', 'rb') as f:
-        gdBoostConfusionMatrix = pickle.load(f)
-    sns.heatmap(gdBoostConfusionMatrix, annot=True, cmap='Greens')
-    plt.xlabel('Predicted Labels')
-    plt.ylabel('True Labels')
-    plt.title('Confusion Matrix')
-
-    # Get the Matplotlib figure object
-    fig = plt.gcf()
-
-    # Display the plot in Streamlit
-    st.pyplot(fig)
-    with open('gdBoostPre.pkl', 'rb') as f:
-        gdBoostPre = pickle.load(f)
-    st.text(gdBoostPre)
-elif model == "DecisionTree Classifier":
-    st.write(f"You selected {model}")
-
-    decisionTreeConfusionMatrix = None
-    with open('decisionTreeConfusionMatrix.pkl', 'rb') as f:
-        decisionTreeConfusionMatrix = pickle.load(f)
-    sns.heatmap(decisionTreeConfusionMatrix, annot=True, cmap='Greens')
-    plt.xlabel('Predicted Labels')
-    plt.ylabel('True Labels')
-    plt.title('Confusion Matrix')
-
-    # Get the Matplotlib figure object
-    fig = plt.gcf()
-
-    # Display the plot in Streamlit
-    st.pyplot(fig)
-    with open('decTreePre.pkl', 'rb') as f:
-        decTreePre = pickle.load(f)
-    st.text(decTreePre)
