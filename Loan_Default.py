@@ -36,7 +36,7 @@ from sklearn.metrics import classification_report
 
 # ## Raw data collection and processing into pandas data frame
 
-# In[ ]:
+# In[2]:
 
 
 df = pd.read_csv("Loan_Default.csv")
@@ -44,7 +44,7 @@ df = pd.read_csv("Loan_Default.csv")
 
 # ## Do profiling to get overall idea about the data distribution
 
-# In[ ]:
+# In[3]:
 
 
 #prof = ProfileReport(df, title = 'Loan Dataset', explorative = True)
@@ -54,7 +54,7 @@ df = pd.read_csv("Loan_Default.csv")
 
 # ## Remove ID and year columns since ID is just unique identifier, and year is 2019 for all
 
-# In[ ]:
+# In[4]:
 
 
 df = df.drop('ID', axis=1)
@@ -63,7 +63,7 @@ df = df.drop('year', axis=1)
 
 # ## Checking for missing values from columns
 
-# In[ ]:
+# In[5]:
 
 
 df = df.dropna(axis = 1)
@@ -71,7 +71,7 @@ df = df.dropna(axis = 1)
 
 # ## Checking for rows with missing values in the columns
 
-# In[ ]:
+# In[6]:
 
 
 df = df.dropna(axis = 0)
@@ -80,7 +80,7 @@ df = df.dropna(axis = 0)
 # ## Checking if dataset has duplicates rows and droping them
 # 
 
-# In[ ]:
+# In[7]:
 
 
 df = df.drop_duplicates()
@@ -88,7 +88,7 @@ df = df.drop_duplicates()
 
 # ## Inorder to have data consistency converting the 'Region' column to have lowercase values
 
-# In[ ]:
+# In[8]:
 
 
 df['Region'] = df['Region'].str.lower()
@@ -99,7 +99,7 @@ df['Region'] = df['Region'].str.lower()
 # ## The dataset has incorrect spelling for the the column 'Security_Type' - correcting this
 # 
 
-# In[ ]:
+# In[9]:
 
 
 df['Region'] = df['Region'].replace('indriect','indirect')
@@ -110,7 +110,7 @@ df['Region'] = df['Region'].replace('indriect','indirect')
 # ## Scaling the 'property_value' in the dataset to optimise the results
 # 
 
-# In[ ]:
+# In[10]:
 
 
 df[['loan_amount']] = StandardScaler().fit_transform(df[['loan_amount']])
@@ -121,7 +121,7 @@ df[['loan_amount']] = StandardScaler().fit_transform(df[['loan_amount']])
 
 # ## Define numeric data types
 
-# In[ ]:
+# In[11]:
 
 
 numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
@@ -129,7 +129,7 @@ numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 
 # ## Checking for outliers
 
-# In[ ]:
+# In[12]:
 
 
 for i in df.select_dtypes(include=numerics).columns:
@@ -147,7 +147,7 @@ print(df.shape)
 
 # ## Correlation Heatmap
 
-# In[ ]:
+# In[13]:
 
 
 sns.heatmap(df.corr(), annot=True)
@@ -155,7 +155,7 @@ sns.heatmap(df.corr(), annot=True)
 
 # ## Changing total_units from string format as 1U, 2U ... to 1, 2
 
-# In[ ]:
+# In[14]:
 
 
 df['total_units'] = df['total_units'].astype(str).str.replace('U', '').astype(int)
@@ -164,7 +164,7 @@ print(df.shape)
 
 # ## Logic to print graphs in groups of size of mx
 
-# In[ ]:
+# In[15]:
 
 
 grp = 0
@@ -172,7 +172,7 @@ mx = 4
 done = []
 
 
-# In[ ]:
+# In[16]:
 
 
 # plot every feature
@@ -189,7 +189,7 @@ def categorical_feature_plot_with_target(feature):
 
 # ## Skip the below columns to plot because of high cardinality leading to higher cognitive overload
 
-# In[ ]:
+# In[17]:
 
 
 skip = ['loan_amount', 'Credit_Score', 'Status']
@@ -197,7 +197,7 @@ skip = ['loan_amount', 'Credit_Score', 'Status']
 
 # ## for every mx number of columns, plot the box
 
-# In[ ]:
+# In[18]:
 
 
 for i in df.columns:
@@ -211,7 +211,7 @@ for i in df.columns:
         break
 
 
-# In[ ]:
+# In[19]:
 
 
 for i in df.columns:
@@ -226,7 +226,7 @@ for i in df.columns:
 # format validation
 
 
-# In[ ]:
+# In[20]:
 
 
 for i in df.columns:
@@ -240,7 +240,7 @@ for i in df.columns:
         break
 
 
-# In[ ]:
+# In[21]:
 
 
 for i in df.columns:
@@ -256,7 +256,7 @@ for i in df.columns:
 
 # ## Bar plot against Status 0
 
-# In[ ]:
+# In[22]:
 
 
 status0 = df[df['Status'] == 0]
@@ -277,7 +277,7 @@ for i in status0.columns:
 # 
 # ## Bar plot against Status 1
 
-# In[ ]:
+# In[23]:
 
 
 status1 = df[df['Status'] == 1]
@@ -291,7 +291,7 @@ for i in status1.columns:
 
 # ## Pair Plot
 
-# In[ ]:
+# In[24]:
 
 
 sns.pairplot(df.drop(['Status'], axis=1))
@@ -299,7 +299,7 @@ plt.title('Pair plot')
 plt.show()
 
 
-# In[ ]:
+# In[25]:
 
 
 status1 = df[df['Status'] == 1]
@@ -307,7 +307,7 @@ s = pd.Series(status1['Credit_Score'], name = 'as')
 ax = s.plot.kde()
 
 
-# In[ ]:
+# In[26]:
 
 
 status1 = df[df['Status'] == 0]
@@ -315,7 +315,7 @@ s = pd.Series(status1['Credit_Score'], name = 'as')
 ax = s.plot.kde()
 
 
-# In[ ]:
+# In[27]:
 
 
 status1 = df[df['Status'] == 1]
@@ -323,7 +323,7 @@ s = pd.Series(status1['loan_amount'])
 ax = s.plot.kde()
 
 
-# In[ ]:
+# In[28]:
 
 
 status1 = df[df['Status'] == 0]
@@ -331,7 +331,7 @@ s = pd.Series(status1['loan_amount'])
 ax = s.plot.kde()
 
 
-# In[ ]:
+# In[29]:
 
 
 #df.to_csv('final_dataset.csv')
@@ -339,13 +339,13 @@ ax = s.plot.kde()
 df.columns
 
 
-# In[ ]:
+# In[30]:
 
 
 #Encoding the categorical variables
 
 
-# In[ ]:
+# In[31]:
 
 
 #Seperating the categorical and numerical columns based on the datatype
@@ -372,31 +372,31 @@ binary_variables = ['Security_Type', 'co-applicant_credit_type', 'Secured_by',
                'open_credit', 'Credit_Worthiness','Status']
 
 
-# In[ ]:
+# In[32]:
 
 
 binary_variables
 
 
-# In[ ]:
+# In[33]:
 
 
 df.columns
 
 
-# In[ ]:
+# In[34]:
 
 
 df[binary_variables]
 
 
-# In[ ]:
+# In[35]:
 
 
 categorical
 
 
-# In[ ]:
+# In[36]:
 
 
 BinaryEncoder = LabelEncoder()
@@ -407,7 +407,7 @@ BinaryEncoder = LabelEncoder()
 BinaryEncoder.fit
 
 
-# In[ ]:
+# In[37]:
 
 
 #labelEncoder = LabelEncoder()
@@ -416,7 +416,8 @@ BinaryEncoder.fit
    # df[i] = labelEncoder.fit_transform(df[i])
 
 
-
+# df.columns
+# print("after cols")
 df_categorical = df[categorical]
 #df_categorical.drop(columns=binary_variables,axis = 1, inplace=True)
 
@@ -445,14 +446,14 @@ df.drop(columns=df_categorical.columns, inplace=True)
 # Concat
 df_merged = pd.concat([df, df_enc_categorical], axis=1, join='inner')
 
-print(done)
+print("done")
 
 df_merged
 
 df_merged.columns
 
 
-# In[ ]:
+# In[38]:
 
 
 #Splitting the data into training set and test set
@@ -471,33 +472,47 @@ X_test = testing_set.drop(columns=['Status'])
 
 
 
-# In[ ]:
+# In[39]:
+
+
+df_merged.columns
+column_names = oneHotEncoder_categorical.get_feature_names_out()
+print(column_names)
+
+
+# In[40]:
 
 
 X_train.shape
 
 
+# In[41]:
+
+
+print(X_test)
+
+
 # # Model 1 - Random Forest Classifier
 
-# In[ ]:
+# In[42]:
 
 
 y_train.shape
 
 
-# In[ ]:
+# In[43]:
 
 
 y_test.shape
 
 
-# In[ ]:
+# In[44]:
 
 
 X_test.shape
 
 
-# In[ ]:
+# In[71]:
 
 
 randomForest = RandomForestClassifier()
@@ -526,6 +541,12 @@ print("done")
 # In[ ]:
 
 
+randomForestConfusionMatrix = confusionMatrix
+
+
+# In[46]:
+
+
 # Plotting the confusion matrix as heatmap
 sns.heatmap(confusionMatrix, annot=True, cmap='Greens')
 
@@ -537,7 +558,7 @@ plt.title('Confusion Matrix')
 plt.show()
 
 
-# In[ ]:
+# In[47]:
 
 
 print(classification_report(y_test,predict))
@@ -545,7 +566,7 @@ print(classification_report(y_test,predict))
 
 # # Model 2 - Logistic Regression
 
-# In[ ]:
+# In[48]:
 
 
 logmodel = LogisticRegression(max_iter=100000)
@@ -558,7 +579,7 @@ cols = X_test.columns.tolist()
 # print("itssss", cols)
 
 
-# In[ ]:
+# In[72]:
 
 
 confusionMatrix = confusion_matrix(y_test, predict)
@@ -567,6 +588,12 @@ print(accuracy_score(y_test, predict))
 
 
 # In[ ]:
+
+
+logisticRegressionConfusionMatrix = confusionMatrix
+
+
+# In[50]:
 
 
 sns.heatmap(confusionMatrix, annot=True, cmap='Greens')
@@ -579,7 +606,7 @@ plt.title('Confusion Matrix')
 plt.show()
 
 
-# In[ ]:
+# In[51]:
 
 
 print(classification_report(y_test,predict))
@@ -588,7 +615,7 @@ print(classification_report(y_test,predict))
 # # Model 3 - Neural Network
 # 
 
-# In[ ]:
+# In[52]:
 
 
 clf = MLPClassifier(random_state=1, hidden_layer_sizes=[10,10], max_iter=3000)
@@ -599,14 +626,14 @@ with open('clf.pkl', 'wb') as f:
 predict=clf.predict(X_test)
 
 
-# In[ ]:
+# In[53]:
 
 
 confusionMatrix = confusion_matrix(y_test, predict)
 print(confusionMatrix)
 
 
-# In[ ]:
+# In[73]:
 
 
 print(accuracy_score(y_test, predict))
@@ -617,6 +644,12 @@ print(classification_report(y_test,predict))
 
 
 # In[ ]:
+
+
+neuralNetworkConfusionMatrix = confusionMatrix
+
+
+# In[55]:
 
 
 sns.heatmap(confusionMatrix, annot=True, cmap='Greens')
@@ -631,7 +664,7 @@ plt.show()
 
 # # Model 4 - Naive Bayes Classifier
 
-# In[ ]:
+# In[56]:
 
 
 NB = GaussianNB()
@@ -641,7 +674,22 @@ with open('NB.pkl', 'wb') as f:
 predict=NB.predict(X_test)
 
 
-# In[ ]:
+# In[57]:
+
+
+cnt = 0
+selected_rows = []
+for p in range(len(predict)):
+    if predict[p] == 1 and X_test.iloc[p][0] >= 0:
+        selected_rows.append(X_test.iloc[p])
+
+df = pd.DataFrame(selected_rows)
+
+# Write the dataframe to a CSV file
+df.to_csv('selected_rows.csv', index=False)
+
+
+# In[74]:
 
 
 confusionMatrix = confusion_matrix(y_test, predict)
@@ -650,6 +698,12 @@ print(accuracy_score(y_test, predict))
 
 
 # In[ ]:
+
+
+naiveBayesConfusionMatrix = confusionMatrix
+
+
+# In[59]:
 
 
 sns.heatmap(confusionMatrix, annot=True, cmap='Greens')
@@ -662,7 +716,7 @@ plt.title('Confusion Matrix')
 plt.show()
 
 
-# In[ ]:
+# In[60]:
 
 
 print(classification_report(y_test,predict))
@@ -670,7 +724,7 @@ print(classification_report(y_test,predict))
 
 # # Model 5 - Gradient Boosting Classifier
 
-# In[ ]:
+# In[61]:
 
 
 gdboost = GradientBoostingClassifier()
@@ -680,7 +734,7 @@ with open('gdboost.pkl', 'wb') as f:
 predict=gdboost.predict(X_test)
 
 
-# In[ ]:
+# In[75]:
 
 
 confusionMatrix = confusion_matrix(y_test, predict)
@@ -689,6 +743,12 @@ print(accuracy_score(y_test, predict))
 
 
 # In[ ]:
+
+
+gdBoostConfusionMatrix = confusionMatrix
+
+
+# In[63]:
 
 
 sns.heatmap(confusionMatrix, annot=True, cmap='Greens')
@@ -701,7 +761,7 @@ plt.title('Confusion Matrix')
 plt.show()
 
 
-# In[ ]:
+# In[64]:
 
 
 print(classification_report(y_test,predict))
@@ -709,7 +769,7 @@ print(classification_report(y_test,predict))
 
 # # Model 6 - Decision Tree Classification
 
-# In[ ]:
+# In[65]:
 
 
 tree=DecisionTreeClassifier()
@@ -719,7 +779,7 @@ with open('tree.pkl', 'wb') as f:
 predict = tree.predict(X_test)
 
 
-# In[ ]:
+# In[76]:
 
 
 confusionMatrix = confusion_matrix(y_test, predict)
@@ -728,6 +788,12 @@ print(accuracy_score(y_test, predict))
 
 
 # In[ ]:
+
+
+decisionTreeConfusionMatrix = confusionMatrix
+
+
+# In[67]:
 
 
 sns.heatmap(confusionMatrix, annot=True, cmap='Greens')
@@ -740,13 +806,13 @@ plt.title('Confusion Matrix')
 plt.show()
 
 
-# In[ ]:
+# In[68]:
 
 
 print(classification_report(y_test,predict))
 
 
-# In[ ]:
+# In[69]:
 
 
 print("DONE")
@@ -758,7 +824,7 @@ print("DONE")
 
 
 
-# In[ ]:
+# In[70]:
 
 
 def getLogisticClassification(X_NEW_TEST):
@@ -784,4 +850,16 @@ def getGDBoostClassification(X_NEW_TEST):
 def getDecisionTreeClassification(X_NEW_TEST):
     predict = tree.predict(X_NEW_TEST)
     return predict
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 

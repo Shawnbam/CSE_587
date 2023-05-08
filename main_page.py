@@ -48,7 +48,7 @@ Security_Type_direct = st.selectbox('Security_Type_direct', ["Yes", "No"])
 submit_button = st.button("Click me")
 
 csv_file = st.file_uploader("Upload a CSV file", type="csv")
-# st.markdown("[Go to another page](streamlit://other_page)")
+st.markdown("[Go to another page](streamlit://second_page)")
 
 if csv_file is not None:
     # Read the file contents into a pandas dataframe
