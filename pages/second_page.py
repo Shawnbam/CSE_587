@@ -10,7 +10,7 @@ if 'my_key' not in st.session_state:
 
 # def second_page():
 model = st.selectbox("Select a model", [
-    "",
+    "Select a model",
     "Logistic Regression",
     "NeuralNetwork",
     "RandomForest Classification",
@@ -19,7 +19,9 @@ model = st.selectbox("Select a model", [
     "DecisionTree Classifier",
 ])
 
-if model == "Logistic Regression":
+if model == "Select a model":
+    st.write(f"Please select a model")
+elif model == "Logistic Regression":
     st.write(f"You selected {model}")
     logisticRegressionConfusionMatrix = None
     with open('logisticRegressionConfusionMatrix.pkl', 'rb') as f:
