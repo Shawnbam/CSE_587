@@ -22,7 +22,7 @@ model = st.selectbox("Select a model", [
 ])
 csv_file = st.file_uploader("Upload a CSV file", type="csv")
 
-if csv_file is not None:
+if csv_file is not None and model != "Select a model":
     # Read the file contents into a pandas dataframe
     df = pd.read_csv(csv_file)
     if model == "Logistic Regression":
