@@ -544,6 +544,9 @@ print("done")
 randomForestConfusionMatrix = confusionMatrix
 
 
+randomForestConfusionMatrix = confusionMatrix
+with open('randomForestConfusionMatrix.pkl', 'wb') as f:
+    pickle.dump(randomForestConfusionMatrix, f)
 # In[46]:
 
 
@@ -591,6 +594,8 @@ print(accuracy_score(y_test, predict))
 
 
 logisticRegressionConfusionMatrix = confusionMatrix
+with open('logisticRegressionConfusionMatrix.pkl', 'wb') as f:
+    pickle.dump(logisticRegressionConfusionMatrix, f)
 
 
 # In[50]:
@@ -648,6 +653,9 @@ print(classification_report(y_test,predict))
 
 neuralNetworkConfusionMatrix = confusionMatrix
 
+neuralNetworkConfusionMatrix = confusionMatrix
+with open('neuralNetworkConfusionMatrix.pkl', 'wb') as f:
+    pickle.dump(neuralNetworkConfusionMatrix, f)
 
 # In[55]:
 
@@ -703,6 +711,9 @@ print(accuracy_score(y_test, predict))
 naiveBayesConfusionMatrix = confusionMatrix
 
 
+naiveBayesConfusionMatrix = confusionMatrix
+with open('naiveBayesConfusionMatrix.pkl', 'wb') as f:
+    pickle.dump(naiveBayesConfusionMatrix, f)
 # In[59]:
 
 
@@ -747,6 +758,9 @@ print(accuracy_score(y_test, predict))
 
 gdBoostConfusionMatrix = confusionMatrix
 
+gdBoostConfusionMatrix = confusionMatrix
+with open('gdBoostConfusionMatrix.pkl', 'wb') as f:
+    pickle.dump(gdBoostConfusionMatrix, f)
 
 # In[63]:
 
@@ -793,6 +807,9 @@ print(accuracy_score(y_test, predict))
 decisionTreeConfusionMatrix = confusionMatrix
 
 
+decisionTreeConfusionMatrix = confusionMatrix
+with open('decisionTreeConfusionMatrix.pkl', 'wb') as f:
+    pickle.dump(decisionTreeConfusionMatrix, f)
 # In[67]:
 
 
