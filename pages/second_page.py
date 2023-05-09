@@ -10,6 +10,7 @@ import pickles
 if 'my_key' not in st.session_state:
     st.session_state['my_key'] = None
 
+
 # def second_page():
 model = st.selectbox("Select a model", [
     "Select a model",
@@ -37,11 +38,18 @@ if csv_file is not None and model != "Select a model":
         result = pickles.getGDBoostClassification(df)
     elif model == "DecisionTree Classifier":
         result = pickles.getTreeClassification(df)
-    
-    predictions = ['Loan Defaulter' if p == 1 else 'Not a Loan Defaulter' for p in result]
-    
+
+    predictions = ['Loan Defaulter' if p ==
+                   1 else 'Not a Loan Defaulter' for p in result]
+
     # Combine the original dataframe and the predicted labels into a new dataframe
-    df['Prediction'] = predictions
+    df['Status'] = predictions
+    for col in df.columns:
+        if col != 'Status' and not (col[0] >= '0' and col[0] <= '9'):
+            fig, ax = plt.subplots()
+            sns.barplot(data=df, x='Status', y=col, ax=ax)
+            ax.set_title(f"{col} vs. Status")
+            st.write(fig)
 
     # Display the combined dataframe as a table
     st.dataframe(df)
