@@ -10,6 +10,13 @@ import pickles
 if 'my_key' not in st.session_state:
     st.session_state['my_key'] = None
 
+markdown_text_pre = """
+# **Defaults Analyser**
+**Predictive Dashboard**
+
+Select a model of choice and upload dataset to find the results.
+"""
+st.markdown(markdown_text_pre, unsafe_allow_html=True)
 
 # def second_page():
 model = st.selectbox("Select a model", [

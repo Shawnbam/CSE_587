@@ -2,6 +2,14 @@ import streamlit as st
 import pickles
 import pandas as pd
 
+markdown_text = """
+# **Defaults Analyser**
+
+Please fill the below form to identify if an user with below credentials would be a Loan Defaulter
+"""
+
+st.markdown(markdown_text, unsafe_allow_html=True)
+
 
 loan_amount = st.text_input('loan_amount(1 = 100k)', 2.882519)
 total_units = st.text_input('total_units', 4.000000)
@@ -45,10 +53,10 @@ Region_north = st.selectbox('Region_north-east', ["No", "Yes"])
 Region_south = st.selectbox('Region_south', ["Yes", "No"])
 Security_Type_Indriect = st.selectbox('Security_Type_Indriect', ["No", "Yes"])
 Security_Type_direct = st.selectbox('Security_Type_direct', ["Yes", "No"])
-submit_button = st.button("Click me")
+submit_button = st.button("Submit")
 
 csv_file = st.file_uploader("Upload a CSV file", type="csv")
-st.markdown("[Go to another page](streamlit://second_page)")
+st.markdown("[Go to another page](streamlit://Predictive_Dashboard)")
 
 if csv_file is not None:
     # Read the file contents into a pandas dataframe
