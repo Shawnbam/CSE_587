@@ -55,24 +55,6 @@ Security_Type_Indriect = st.selectbox('Security_Type_Indriect', ["No", "Yes"])
 Security_Type_direct = st.selectbox('Security_Type_direct', ["Yes", "No"])
 submit_button = st.button("Submit")
 
-csv_file = st.file_uploader("Upload a CSV file", type="csv")
-st.markdown("[Go to another page](streamlit://Predictive_Dashboard)")
-
-if csv_file is not None:
-    # Read the file contents into a pandas dataframe
-    df = pd.read_csv(csv_file)
-
-    # # Display the dataframe
-    # st.write(df)
-    result = pickles.getNBClassification(df)
-    predictions = ['Loan Defaulter' if p == 1 else 'Not a Loan Defaulter' for p in result]
-    
-    # Combine the original dataframe and the predicted labels into a new dataframe
-    df['Prediction'] = predictions
-
-    # Display the combined dataframe as a table
-    st.dataframe(df)
-
 if submit_button:
     Gender_Female_val = float(0.00)
     if Gender_Female == "Yes":
